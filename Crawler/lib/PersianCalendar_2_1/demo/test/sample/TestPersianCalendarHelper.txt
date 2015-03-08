@@ -1,0 +1,40 @@
+This test compares PersianCalendarHelper and PersianCalendarHelper1 classes for 2000000 days.
+
+Day #-1000000
+Day #-900000
+Day #-800000
+Day #-700000
+Day #-600000
+Day #-500000
+Day #-400000
+Day #-300000
+Day #-200000
+Day #-100000
+Day #0
+Day #100000
+Day #200000
+Day #300000
+Day #400000
+Day #500000
+Day #600000
+Day #700000
+Day #800000
+Day #900000
+
+Test SUCCEEDED!
+
+Time spent by PersianCalendarHelper:
+jp: 12243 ms
+pj: 5687 ms
+Time spent by PersianCalendarHelper1:
+jp: 73946 ms
+pj: 3131 ms
+
+System Properties:
+
+user.name:              Ghasem
+java.runtime.version:   1.5.0-beta-b31
+Default locale:         fa_IR
+Default timezone:       Asia/Tehran
+
+Date: Fri Mar 18 18:42:22 IRST 2005

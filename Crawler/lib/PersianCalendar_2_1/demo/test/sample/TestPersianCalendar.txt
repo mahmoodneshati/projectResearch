@@ -1,0 +1,13 @@
+
+This program performs some tests on PersianCalendar class.
+
+All tests SUCCEEDED!
+
+System Properties:
+
+user.name:              Ghasem
+java.runtime.version:   1.5.0-beta-b31
+Default locale:         fa_IR
+Default timezone:       Asia/Tehran
+
+Date: Fri Mar 18 18:40:34 IRST 2005

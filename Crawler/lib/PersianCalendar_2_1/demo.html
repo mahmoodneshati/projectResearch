@@ -1,0 +1,56 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+	<head>
+		<meta name="author" content="Ghasem Kiani">
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta http-equiv="Content-Language" content="en-US">
+		<title>Persian Calendar, version 2.1: Demo</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<style>
+	.figure
+	{
+		margin-bottom: 0;
+	}
+	.caption
+	{
+		margin-top: 0;
+		font-style: italic;
+		width: 12cm;
+	}
+		</style></head>
+	<body>
+		<h1>Persian Calendar, version 2.1</h1>
+		<h2>Demo</h2>
+		<p>The <a href="demo"><code>demo</code></a> directory contains batch files to run the following demos. If the batch files do not apply to your operating system, it would be a trivial task to convert them to appropriate scripts.</p>
+		<p>The class files for these demos are compiled into a JAR file, <a href="demo/demo.jar"><code>demo.jar</code></a>. But JAR files in the <a href="lib"><code>lib</code></a> directory are also needed for their execution.</p>
+		<h3><a id="PersianCalendarDemo">Persian Calendar Demo</a></h3>
+		<p>The following figures show graphically how to use this demo app. You can go to <a href="demo"><code>demo</code></a> directory and run it using <code>PersianCalendarDemo.bat</code> batch file. Note that when the program starts, it uses a Gregorian calendar, and you must change the calendar type to "Persian" to see the Persian calendar in action. Also note that in all demos, the month field is shown 1-based (even though it is represented internally as 0-based).</p>
+		<p class="figure"><img src="images/image01.png" alt="Persian Calendar Demo"></p>
+		<p class="caption"><strong>Persian Calendar Demo.</strong> Here, I have changed the calendar type to "Persian", changed the Date format style to "Full", and clicked the Refresh button. Since no date or time has been applied and no calculations performed, it shows the current date and time (at the time the program was run!).</p>
+		<p class="figure"><img src="images/image02.png" alt="Persian Calendar Demo: Germany German locale"></p>
+		<p class="caption"><strong>Persian Calendar Demo.</strong> Germany German locale, showing the date of Shahrivar 17, 1357.</p>
+		<p class="figure"><img src="images/image03.png" alt="Persian Calendar Demo: Esperanto locale"></p>
+		<p class="caption"><strong>Persian Calendar Demo.</strong> The same date, with locale changed to Esperanto.</p>
+		<p class="figure"><img src="images/image04.png" alt="Persian Calendar Demo: Convert the date to Gregorian calendar"></p>
+		<p class="caption"><strong>Persian Calendar Demo.</strong> Keeping the same time in millis (checking the corresponding check box), we can convert the date to another calendar (Gregorian in this case).</p>
+		<p class="figure"><img src="images/image05.png" alt="Persian Calendar Demo: Add function"></p>
+		<p class="caption"><strong>Persian Calendar Demo.</strong> Keeping the same time in millis (checking the corresponding check box), I have added 7 months (note the check box next to Add fields).</p>
+		<p class="figure"><img src="images/image06.png" alt="Persian Calendar Demo: Using a custom pattern"></p>
+		<p class="caption"><strong>Persian Calendar Demo.</strong> Using a custom pattern.</p>
+		<p class="figure"><img src="images/image07.png" alt="Persian Calendar Demo: Afghanistan locale"></p>
+		<p class="caption"><strong>Persian Calendar Demo.</strong> Current date formatted according to Persian (Afghanistan) locale.</p>
+		<p>This class uses a useful utility class named <a href="src/com/ghasemkiani/gui/layout/Bagger.java"><code>Bagger</code></a>, which greatly simplifies creation of GUI layouts based on the <code>java.awt.GridBagLayout</code>.</p>
+		<h3><a id="PersianCalendarDemoWebApp">Persian Calendar Demo Web App</a></h3>
+		<p>To deploy the Persian Calendar Demo Web App, just copy the file <a href="demo/PersianCalendarDemo.war"><code>PersianCalendarDemo.war</code></a> to <a href="http://jakarta.apache.org/tomcat">Tomcat</a>'s <code>webapps</code> directory. I have only tested Tomcat version 5.5.2.</p>
+		<p class="figure"><img src="images/image08.png" alt="Persian Calendar Demo Web App"></p>
+		<p class="caption"><strong>Persian Calendar Demo Web App.</strong> This web app is functionally equivalent to the demo app presented above.</p>
+		<p>Even if you don't deploy the demo web app, you may want to have a look at <a href="demo/form.jspx.html">the source</a> for this web app.</p>
+		<h3><a id="PersianGregorianDateConverter">Persian-Gregorian Date Converter</a></h3>
+		<p>This program shows the use of the <a href="doc/com/ghasemkiani/util/SimplePersianCalendar.html"><code>SimplePersianCalendar</code></a> class. You can go to <a href="demo"><code>demo</code></a> directory and run it using <code>PersianGregorianDateConverter.bat</code> batch file. It should be kept in mind that in this program, year 1 B.C. is represented as 0 in the Gregorian year field, and year 1 B.H. is shown as year -1 in the Persian year field. The same difference applies for any B.C. (Gregorian) or B.H. (Persian) year. This is because of the difference in internal representation of the year in <a href="doc/com/ghasemkiani/util/SimplePersianCalendar.html"><code>SimplePersianCalendar</code></a> and <code>java.util.Calendar</code> classes.</p>
+		<p class="figure"><img src="images/image09.png" alt="Persian-Gregorian Date Converter"></p>
+		<p class="caption"><strong>Persian-Gregorian Date Converter.</strong> This demo app shows the usage of the <a href="doc/com/ghasemkiani/util/SimplePersianCalendar.html"><code>SimplePersianCalendar</code></a> class.</p>
+		<hr>
+		<p class="footer" style="margin-bottom: 0;"><a href="index.html">home</a>&nbsp;|&nbsp;<a href="readme.html">readme</a>&nbsp;|&nbsp;<a href="history.html">history</a>&nbsp;|&nbsp;<a>demo</a>&nbsp;|&nbsp;<a href="doc/index.html">javadoc</a>&nbsp;|&nbsp;<a href="gpl.txt">license</a></p>
+		<p class="footer" style="margin-top: 0;">© 2003-2005, <a href="mailto:ghasemkiani@yahoo.com">Ghasem Kiani</a></p></body></html>

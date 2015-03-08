@@ -1,0 +1,42 @@
+
+This test compares PersianCalendar and SimplePersianCalendar classes for 2000000 days.
+The timezone of both calendars is arbitrarily set to America/Los_Angeles.
+
+Day #-1000000
+Day #-900000
+Day #-800000
+Day #-700000
+Day #-600000
+Day #-500000
+Day #-400000
+Day #-300000
+Day #-200000
+Day #-100000
+Day #0
+Day #100000
+Day #200000
+Day #300000
+Day #400000
+Day #500000
+Day #600000
+Day #700000
+Day #800000
+Day #900000
+
+Test SUCCEEDED!
+
+Time spent by PersianCalendar:
+jp: 30317 ms
+pj: 34550 ms
+Time spent by SimplePersianCalendar:
+jp: 26987 ms
+pj: 19382 ms
+
+System Properties:
+
+user.name:              Ghasem
+java.runtime.version:   1.5.0-beta-b31
+Default locale:         fa_IR
+Default timezone:       Asia/Tehran
+
+Date: Fri Mar 18 18:44:28 IRST 2005

@@ -1,0 +1,30 @@
+html
+{
+}
+body
+{
+	background-color: #ccccff;
+}
+a
+{
+	text-decoration: none;
+}
+a:hover
+{
+	text-decoration: underline;
+	color: red;
+	background-color: yellow;
+}
+a:active
+{
+	text-decoration: underline;
+	color: darkgreen;
+}
+a:visited
+{
+}
+.footer
+{
+	font-size: 75%;
+	text-align: center;
+}

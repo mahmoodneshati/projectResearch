@@ -1,0 +1,167 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+	<head>
+		<meta name="author" content="Ghasem Kiani">
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta http-equiv="Content-Language" content="en-US">
+		<title>Persian Calendar, version 2.1: Description</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<style>
+	.code
+	{
+		background-color: white;
+		border: solid gray 1px;
+	}
+	.result
+	{
+		background-color: linen;
+		border: solid gray 1px;
+	}
+		</style></head>
+	<body>
+		<h1>Persian Calendar, version 2.1</h1>
+		<h2>Description</h2>
+		<p>The formal calendar in general use in Iran is the Solar Hijri Calendar, also called the Jalali Calendar. We call it here the Persian calendar. The Persian calendar uses a complex algorithm for calculating the leap years. The algorithm is illustrated in class <a href="src/com/ghasemkiani/util/PersianCalendarHelper1.java"><code>PersianCalendarHelper1</code></a>, which is there just for illustrative purposes and is not used by other class (class <a href="doc/com/ghasemkiani/util/PersianCalendarHelper.html"><code>PersianCalendarHelper</code></a> is used instead). But briefly, I can say that there are 683 leap years (366-day years) in each grand cycle of 2820 years, and the rest of the years are normal, 365-day years. The legal definition of leap years is astronomical in nature: whenever the vernal equinox is before 12:00:00 hours by the Tehran true time, that day is Nowruz (Farvardin 1st), otherwise that day is Esfand 30th, and the year is a leap year.</p>
+		<p>I have used a well-known <em>arithmetic</em> algorithm for calculating the leap years, which is practically equivalent to the astronomical definition for several hundreds of years. By all chances, I will also release an astronomical version in the future.</p>
+		<p>The algorithms have been rewritten and some bugs in the Java code have been corrected, but, originally, they have been based on the &quot;<a href="http://couprie.docspages.com/calmath/">Calendar Math Add-In for Excel</a>&quot; by <a href="mailto:kees@couprie.org">Kees Couprie</a>, whose contribution is gratefully acknowledged.</p>
+		<p><em>Even though I have tested this software, there may be some errors and bugs I have not noticed. If you find an error, I would be grateful if you drop <a href="mailto:ghasemkiani@yahoo.com" title="Ghasem Kiani's E-mail Address">me</a> an e-mail and let me know the error.</em></p>
+		<h3><a href="doc/com/ghasemkiani/util/icu/PersianCalendar.html"><code>PersianCalendar</code></a></h3>
+		<p>This class is a subclass of <code>com.ibm.icu.util.Calendar</code>. It is, therefore, based on the calendar framework of <a href="http://oss.software.ibm.com/icu4j">ICU4J</a>. ICU4J is copyrighted by International Business Machines Corporation (IBM). Please see the <a href="lib/icu4j_3_2_license.html">ICU4J license</a>.</p>
+		<p>This class is a full implementation and, as far as I have tested, its calendar calculations, including add and roll functions, work fine. This class uses <code>com.ibm.icu.text.DateFormat</code> and <code>com.ibm.icu.text.DateFormatSymbols</code> subclasses to support month and era names for the Persian calendar. A <code>java.util.ResourceBundle</code> is used for i18n of these names.</p>
+		<p>I have presented quite a few demo and test classes, but here I will present simple code snippets to show you how to use this class. The following example shows how to format a date for a given locale. For complete disambiguation, I present fully qualified names of classes:</p>
+		<pre class="code">
+	
+	// Create a calendar with the default timezone and locale
+	com.ibm.icu.util.Calendar cal =
+		new com.ghasemkiani.util.icu.PersianCalendar();
+	// Set its time to Bahman 22, 1357
+	cal.set(com.ibm.icu.util.Calendar.ERA,
+		com.ghasemkiani.util.icu.PersianCalendar.AH);
+	cal.set(com.ibm.icu.util.Calendar.YEAR, 1357);
+	cal.set(com.ibm.icu.util.Calendar.MONTH,
+		com.ghasemkiani.util.icu.PersianCalendar.BAHMAN);
+	cal.set(com.ibm.icu.util.Calendar.DAY_OF_MONTH, 22);
+	com.ibm.icu.text.DateFormat df = cal.getDateTimeFormat(
+		com.ibm.icu.text.DateFormat.FULL, -1,
+		new com.ibm.icu.util.ULocale("fa", "IR", ""));
+	String result = df.format(cal.getTime());
+		</pre>
+		<p>Now, the <code>result</code> variable will contain something like this:</p>
+		<p class="result" style="direction: rtl;">&#x06cc;&#x06a9;&#x200c;&#x0634;&#x0646;&#x0628;&#x0647;&#x060c; &#x06f2;&#x06f2; &#x0628;&#x0647;&#x0645;&#x0646; &#x06f1;&#x06f3;&#x06f5;&#x06f7;</p>
+		<p>Consider using another locale:</p>
+		<pre class="code">
+	
+	// ...
+	com.ibm.icu.text.DateFormat df = cal.getDateTimeFormat(
+		com.ibm.icu.text.DateFormat.FULL, -1,
+		new com.ibm.icu.util.ULocale("tr", "", ""));
+	String result = df.format(cal.getTime());
+		</pre>
+		<p>The result looks like this:</p>
+		<p class="result">22 Behmen 1357 Pazar</p>
+		<p>For Afghanistan, I have used another version of month names. Consider using this locale:</p>
+		<pre class="code">
+	
+	// ...
+	com.ibm.icu.text.DateFormat df = cal.getDateTimeFormat(
+		com.ibm.icu.text.DateFormat.FULL, -1,
+		new com.ibm.icu.util.ULocale("fa", "AF", ""));
+	String result = df.format(cal.getTime());
+		</pre>
+		<p>The result is:</p>
+		<p class="result" style="direction: rtl;">&#x06cc;&#x06a9;&#x200c;&#x0634;&#x0646;&#x0628;&#x0647;&#x060c; &#x06f2;&#x06f2; &#x062f;&#x0644;&#x0648; &#x06f1;&#x06f3;&#x06f5;&#x06f7;</p>
+		<p>It should be noted that there is a difference between the solar calendar of Afghanistan and Iran. The calculation of leap years is different. I have not used the Afghani version of the calendar, and I don't know if this is a good idea to use the zodiacal month names in the Iranian calendar for the Afghanistan locale. Any help on this will be appreciated. Besides, the ideal solution will be to implement the Afghani version of the calendar (I don't think this is a difficult task, as far as I know).</p>
+		<p>This class can be used in conjunction with other calendar types to convert dates between calendars:</p>
+		<pre class="code">
+	
+	com.ibm.icu.util.Calendar cal =
+		new com.ghasemkiani.util.icu.PersianCalendar();
+	com.ibm.icu.util.Calendar gcal =
+		new com.ibm.icu.util.GregorianCalendar();
+	cal.set(com.ibm.icu.util.Calendar.ERA,
+		com.ghasemkiani.util.icu.PersianCalendar.AH);
+	cal.set(com.ibm.icu.util.Calendar.YEAR, 1357);
+	cal.set(com.ibm.icu.util.Calendar.MONTH,
+		com.ghasemkiani.util.icu.PersianCalendar.BAHMAN);
+	cal.set(com.ibm.icu.util.Calendar.DAY_OF_MONTH, 22);
+	int julianDay = cal.get(com.ibm.icu.util.Calendar.JULIAN_DAY);
+	gcal.set(com.ibm.icu.util.Calendar.JULIAN_DAY, julianDay);
+	com.ibm.icu.text.DateFormat df = gcal.getDateTimeFormat(
+		com.ibm.icu.text.DateFormat.FULL, -1,
+		new com.ibm.icu.util.ULocale("en", "US", ""));
+	String result = df.format(cal.getTime());
+		</pre>
+		<p>And this is the result:</p>
+		<p class="result">Sunday, February 11, 1979</p>
+		<p>The following code shows another way to get a <code>PersianDateFormat</code> (note that we pass <code>cal</code> as an argument):</p>
+		<pre class="code">
+	
+	com.ibm.icu.util.Calendar cal =
+		new com.ghasemkiani.util.icu.PersianCalendar();
+	cal.set(com.ibm.icu.util.Calendar.ERA,
+		com.ghasemkiani.util.icu.PersianCalendar.AH);
+	cal.set(com.ibm.icu.util.Calendar.YEAR, 1357);
+	cal.set(com.ibm.icu.util.Calendar.MONTH,
+		com.ghasemkiani.util.icu.PersianCalendar.BAHMAN);
+	cal.set(com.ibm.icu.util.Calendar.DAY_OF_MONTH, 22);
+	com.ibm.icu.text.DateFormat df =
+		com.ibm.icu.text.DateFormat.getDateInstance(
+			cal, com.ibm.icu.text.DateFormat.FULL,
+			new com.ibm.icu.util.ULocale("ru", "", ""));
+	String result = df.format(cal.getTime());
+		</pre>
+		<p>And this is the result (the locale-specific data may be improved in the future if I receive any feedback):</p>
+		<p class="result">22 &#x0411;&#x0430;&#x0445;&#x043c;&#x0430;&#x043d; 1357 &#x0433;.</p>
+		<p>Of course, we can directly construct an instance of <a href="doc/com/ghasemkiani/util/icu/PersianDateFormat.html"><code>PersianDateFormat</code></a>, which is by default initialized to a <a href="doc/com/ghasemkiani/util/icu/PersianCalendar.html"><code>PersianCalendar</code></a>:</p>
+		<pre class="code">
+	
+	com.ibm.icu.text.DateFormat df = 
+		new com.ghasemkiani.util.icu.PersianDateFormat(
+			"EEEE d MMMM y G h:mm:ss a zzzz",
+			new com.ibm.icu.util.ULocale("fa", "IR", ""));
+	String result = df.format(new java.util.Date());
+		</pre>
+		<p>And this is the result (for the time I am doing this, of course):</p>
+		<p class="result" style="direction: rtl;">&#x06cc;&#x06a9;&#x200c;&#x0634;&#x0646;&#x0628;&#x0647; &#x06f9; &#x0627;&#x0633;&#x0641;&#x0646;&#x062f; &#x06f1;&#x06f3;&#x06f8;&#x06f3; &#x0647;&#x200d;.&#x0634;. &#x06f1;&#x06f2;:&#x06f0;&#x06f1;:&#x06f0;&#x06f1; &#x0628;.&#x0638;. &#x0648;&#x0642;&#x062a; &#x0627;&#x0633;&#x062a;&#x0627;&#x0646;&#x062f;&#x0627;&#x0631;&#x062f; &#x062a;&#x0647;&#x0631;&#x0627;&#x0646;</p>
+		<p>Due to the great work the developers of <a href="http://oss.software.ibm.com/icu4j">ICU4J</a> have done, there are much more things that can be done, but I think this is enough to show the usage of the <a href="doc/com/ghasemkiani/util/icu/PersianCalendar.html"><code>PersianCalendar</code></a> class. You can also check the <a href="demo.html">demos</a>.</p>
+		<h3><a href="doc/com/ghasemkiani/util/SimplePersianCalendar.html"><code>SimplePersianCalendar</code></a></h3>
+		<p>The class <a href="doc/com/ghasemkiani/util/SimplePersianCalendar.html"><code>SimplePersianCalendar</code></a> is a subclass of <code>java.util.GregorianCalendar</code>, with the added functionality that it can set/get date in the Persian calendar system. This class is kept here for backward compatibility. Now, it has a common base of functionality with the <a href="doc/com/ghasemkiani/util/icu/PersianCalendar.html"><code>PersianCalendar</code></a> class. A new read/write property (<code>julianDay</code>) has been added to this class.</p>
+		<p>One thing is worth of mentioning about this class: Year 0 has no meaning with this class. Year 1 A.H. is year 1 and year 1 B.H. is year -1. Months are zero-based and days are 1-based.</p>
+		<p>This class uses the <a href="doc/com/ghasemkiani/util/DateFields.html"><code>DateFields</code></a> class to set/get the Persian date. As for calendar calculations, they can be done just like any other instance of the <code>java.util.GregorianCalendar</code> class, <i>i.e.</i>, they are not performed on Persian date fields.</p>
+		<p>Using <code>SimplePersianCalendar</code> is straightforward. For example, to convert the current date into Persian date, we can write:</p>
+		<pre class="code">
+	com.ghasemkiani.util.SimplePersianCalendar c =
+		new com.ghasemkiani.util.SimplePersianCalendar();
+	com.ghasemkiani.util.DateFields t = c.getDateFields();
+	System.out.println(
+		"Current date in the Persian calendar is: " +
+		t.getYear() + "/" +
+		(t.getMonth() + 1) + "/" +
+		t.getDay() + ".");</pre>
+		<p>See the <a href="demo.html#PersianGregorianDateConverter">demo app</a> for more details.</p>
+		<h3>System Requirements</h3>
+		<p>I am using the following software environment:</p>
+		<ul>
+			<li><a href="http://java.sun.com/">Java </a> version 1.5.0-beta</li>
+			<li><a href="http://oss.software.ibm.com/icu4j/download/3.2/index.html">ICU4J</a> version 3.2 (released 2004-11-22)</li>
+			<li><a href="http://jakarta.apache.org/tomcat">Tomcat</a> version 5.5.2 (for demo web app)</li></ul>
+		<p>Any prior versions may have problems with this software.</p>
+		<h3>About...</h3>
+		<p>This software was written by Ghasem Kiani, M.D. I am a pediatrician and I do programming (mainly in Java) on a freelance basis.</p>
+		<dl>
+			<dt>My email</dt>
+			<dd><a href="mailto:ghasemkiani@yahoo.com"><code>ghasemkiani@yahoo.com</code></a></dd>
+			<dt>My weblog</dt>
+			<dd><a href="http://ghasemkiani.blogspot.com"><code>ghasemkiani.blogspot.com</code></a></dd></dl>
+		<h3>Acknowledgements</h3>
+		<p>I am grateful to:</p>
+		<ul>
+			<li>The developers of <a href="http://oss.software.ibm.com/icu4j">ICU4J</a> for the great improvements they have made to the calendar framework of Java.</li>
+			<li><a href="http://couprie.docspages.com/">Kees Couprie</a> for <a href="http://couprie.docspages.com/calmath/">Calendar Math Add-In for Excel</a>, which I used for writing the algorithm of the Persian calendar leap years in the first place.</li>
+			<li><a href="http://cfg11n.blogspot.com/">Paul Hastings</a>, who requested a Persian Calendar for <a href="http://oss.software.ibm.com/icu4j">ICU4J</a> and insists on this. Just like <a href="http://cfg11n.blogspot.com/2004/11/icu4j-dirty-secret-exposed.html">Paul</a>, I wonder why the <a href="http://oss.software.ibm.com/icu4j">ICU4J</a> doesn't include a Persian calendar, though I can guess some reasons for this.</li>
+			<li><a href="http://utf-8.blogspot.com/">Roozbeh Pournader</a> for compiling the Persian locale in CLDR.</li></ul>
+		<hr>
+		<p class="footer" style="margin-bottom: 0;"><a href="index.html">home</a>&nbsp;|&nbsp;<a>readme</a>&nbsp;|&nbsp;<a href="history.html">history</a>&nbsp;|&nbsp;<a href="demo.html">demo</a>&nbsp;|&nbsp;<a href="doc/index.html">javadoc</a>&nbsp;|&nbsp;<a href="gpl.txt">license</a></p>
+		<p class="footer" style="margin-top: 0;">&copy; 2003-2005, <a href="mailto:ghasemkiani@yahoo.com">Ghasem Kiani</a></p></body></html>
